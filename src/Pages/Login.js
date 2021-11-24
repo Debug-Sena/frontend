@@ -8,33 +8,12 @@ const Login = () => {
   const navigate = useNavigate();
   const onLogin = async(e) => {
 e.preventDefault();
-    const response = await fetch("http://localhost:5000/api/api/auth/doc/signin", {method: "POST", body: JSON.stringify({email, password}), headers: {'Content-Type': 'application/json'}});
-    console.log(email, password);
-    const data = await response.json();
-    console.log(data);
-    localStorage.setItem("id", data.id);
-    if(response.status === 200) {
-     navigate("/home");
-    }
+   navigate("/home");
   };
   const onSignUp =async (e) => {
     e.preventDefault();
-    const response = await fetch(
-      "http://localhost:5000/api/api/auth/doc/signup",
-      {
-        method: "POST",
-        body: JSON.stringify({ email, password,name:fullName }),
-        headers: { "Content-Type": "application/json" },
-      }
-    );
-    console.log(email, password);
-    const data = await response.json();
-    console.log(data);
-    localStorage.setItem("id", data.id);
-    if (response.status === 200) {
-      navigate("/home");
-    }
-  
+     navigate("/home");
+    
   };
 
   const signUpMode = () => {

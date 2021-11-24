@@ -15,45 +15,25 @@ const AddDocument = () => {
        const navigate = useNavigate();
     const onSubmit = async(e) => {
         e.preventDefault();
-       const filesBase64 = fileList && fileList.map((e) => e.base64);
-       const files =
-         filesBase64 && `[${filesBase64.map((e) => `'${e}'`).join(",")}]`;
-         console.log(userId);
-        const response = await fetch("http://localhost:5000/api/api/task/document", {method: "POST",body: JSON.stringify({name,doctor,date,data:files,userid:userId}),headers: {'Content-Type': 'application/json'}});
-        const data = await response.json();
-        console.log(data);
-        if(response.status===200){
-         navigate(`/view/${userId}`)
-        }
+      console.log(name,doctor,date)
         
     }
-    const handleFileChange = ({ file, fileList }) => {
-      if (file.status !== "uploading") {
-        fileList.forEach(function (file, index) {
-          let reader = new FileReader();
-          reader.onload = (e) => {
-            file.base64 = e.target.result;
-          };
-          reader.readAsDataURL(file.originFileObj);
-        });
-        setFileList(fileList);
-      }
-    };
+    
     return (
       <div>
         <div className="site-page-header-ghost-wrapper">
           <PageHeader
             ghost={false}
             onBack={() => window.history.back()}
-            title="Add Document"
-            subTitle="Add patient documents"
+            title="Contact us"
+            
           ></PageHeader>
         </div>
         <form onSubmit={onSubmit} class="form__sign-in">
-          <h2 class="form__title">Add Document</h2>
+          <h2 class="form__title">Contact us</h2>
           <div class="form__input-field">
             <i class="fas fa-file"></i>
-            <input type="text" placeholder="Document Name" onChange={e=>{setName(e.target.value)}} required />
+            <input type="text" placeholder="Your Name" onChange={e=>{setName(e.target.value)}} required />
           </div>
           <div class="form__input-field">
             <i class="fas fa-user"></i>
@@ -63,16 +43,8 @@ const AddDocument = () => {
             <i class="fa fa-calendar"></i>
             <input type="text" placeholder="Date" onChange={e=>{setDate(e.target.value)}} required />
           </div>
-          <Upload
-            accept=".xlsx,.xls,image/*,.doc, .docx,.ppt, .pptx,.txt,.pdf"
-            maxCount={1}
-            fileList={fileList}
-            onChange={handleFileChange}
-          >
-            <Button icon={<UploadOutlined />}>Upload</Button>
-          </Upload>
-
-          <input class="form__submit" type="submit" value="Save" />
+         
+          <input class="form__submit" type="submit" value="Send" />
         </form>
       </div>
     );
